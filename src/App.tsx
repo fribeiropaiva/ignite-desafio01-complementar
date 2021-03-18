@@ -3,8 +3,8 @@ import { useEffect, useState } from 'react';
 import { Button } from './components/Button';
 import { MovieCard } from './components/MovieCard';
 
-// import { SideBar } from './components/SideBar';
-// import { Content } from './components/Content';
+import { SideBar } from './components/SideBar';
+import { Content } from './components/Content';
 
 import { api } from './services/api';
 
@@ -65,6 +65,7 @@ export function App() {
         <div className="buttons-container">
           {genres.map(genre => (
             <Button
+              key={String(genre.id)}
               id={String(genre.id)}
               title={genre.title}
               iconName={genre.name}
@@ -73,22 +74,9 @@ export function App() {
             />
           ))}
         </div>
-
       </nav>
+      <Content selectedGenre={selectedGenre} movies={movies} />
 
-      <div className="container">
-        <header>
-          <span className="category">Categoria:<span> {selectedGenre.title}</span></span>
-        </header>
-
-        <main>
-          <div className="movies-list">
-            {movies.map(movie => (
-              <MovieCard title={movie.Title} poster={movie.Poster} runtime={movie.Runtime} rating={movie.Ratings[0].Value} />
-            ))}
-          </div>
-        </main>
-      </div>
     </div>
   )
 }
